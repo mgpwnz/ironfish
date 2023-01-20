@@ -42,8 +42,7 @@ function installSoftware {
 	cd $HOME
 	npm install -g ironfish
 }
-function connect{
-	echo -e '\n\e[42m Insert link ironfish profile\e[0m\n'
+function connect {
 	ironfish testnet
 	}
 
@@ -124,7 +123,7 @@ do
 			echo -e '\n\e[33mYour node was upgraded!\e[0m\n' && sleep 1
 			break
             ;;
-"Delete")
+	"Delete")
             echo -e '\n\e[31mYou choose delete...\e[0m\n' && sleep 1
 			deleteIronfish
 			echo -e '\n\e[42mIronfish was deleted!\e[0m\n' && sleep 1
@@ -136,8 +135,3 @@ do
         *) echo -e "\e[91minvalid option $REPLY\e[0m";;
     esac
 done
-
-
-
-
-
