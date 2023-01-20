@@ -42,6 +42,11 @@ function installSoftware {
 	cd $HOME
 	npm install -g ironfish
 }
+function connect{
+	echo -e '\n\e[42m Insert link ironfish profile\e[0m\n'
+	ironfish testnet
+	}
+
 
 function updateSoftware {
 	sudo systemctl stop ironfishd
@@ -109,6 +114,7 @@ do
  		echo -e '\n\e[42mYou choose install...\e[0m\n' && sleep 1
 			installDeps
 			installSoftware
+			connect
 			installService
 			break
             ;;
