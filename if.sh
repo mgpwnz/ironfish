@@ -161,13 +161,14 @@ fi
 }
 
 function deleteIronfish {
-	sudo systemctl disable ironfishd #ironfishd-miner
-	sudo systemctl stop ironfishd #ironfishd-miner 
+	sudo systemctl disable ironfishd 
+	sudo systemctl stop ironfishd 
 	sudo rm -rf $HOME/ironfish $HOME/.ironfish $(which ironfish)
 }
 
 PS3='Please enter your choice (input your option number and press enter): '
-options=("Install" "Upgrade" "Backup wallet" "Install snapshot" "Delete" "Quest" "Quit")
+#options=("Install" "Upgrade" "Backup wallet" "Install snapshot" "Delete" "Quest" "Quit")
+options=("Install" "Quest" "Upgrade" "Backup wallet" "Delete" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
