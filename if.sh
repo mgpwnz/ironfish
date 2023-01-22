@@ -141,6 +141,15 @@ function updateSoftware {
 
 }
 function quest {
+##### AssetId #########
+if [ ! $AssetId ]; then
+		ironfish wallet:balances
+		read -p "Enter wallet name: " AssetId
+		echo 'export AssetId='${AssetId} >> $HOME/.bash_profile
+	fi
+	. $HOME/.bash_profile
+	sleep 1
+##### AssetId end #########
 . <(wget -qO- https://raw.githubusercontent.com/mgpwnz/ironfish/main/send.sh) && \
 . <(wget -qO- https://raw.githubusercontent.com/mgpwnz/ironfish/main/burn.sh) && \
 . <(wget -qO- https://raw.githubusercontent.com/mgpwnz/ironfish/main/mint.sh) && \
