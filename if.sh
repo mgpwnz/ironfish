@@ -209,7 +209,7 @@ function deleteIronfish {
 }
 
 PS3='Please enter your choice (input your option number and press enter): '
-options=("Install" "Upgrade" "Backup wallet" "Install snapshot" "Delete" "Quit")
+options=("Install" "Upgrade" "Backup wallet" "Install snapshot" "Delete" "Quest" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -245,6 +245,11 @@ do
 			 echo -e '\n\e[33mSnapshot was installed, node was started.\e[0m\n' && sleep 1
 			 break
              ;;
+	     	"Quest")
+			echo -e '\n\e[33mYou choose quest...\e[0m\n' && sleep 1
+			quest
+			break
+	     ;;
 		"Delete")
             echo -e '\n\e[31mYou choose delete...\e[0m\n' && sleep 1
 			deleteIronfish
