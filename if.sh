@@ -37,11 +37,11 @@ function setupVars {
 		echo 'export IRONFISH_NODENAME='${IRONFISH_NODENAME} >> $HOME/.bash_profile
 	fi
 	echo -e '\n\e[42mYour node name:' $IRONFISH_NODENAME '\e[0m\n'
-	if [ ! $IRONFISH_THREADS ]; then
-		read -e -p "Enter your threads [-1]: " IRONFISH_THREADS
-		echo 'export IRONFISH_THREADS='${IRONFISH_THREADS:--1} >> $HOME/.bash_profile
-	fi
-	echo -e '\n\e[42mYour threads count:' $IRONFISH_THREADS '\e[0m\n'
+#	if [ ! $IRONFISH_THREADS ]; then
+#		read -e -p "Enter your threads [-1]: " IRONFISH_THREADS
+#		echo 'export IRONFISH_THREADS='${IRONFISH_THREADS:--1} >> $HOME/.bash_profile
+#	fi
+#	echo -e '\n\e[42mYour threads count:' $IRONFISH_THREADS '\e[0m\n'
 	echo 'source $HOME/.bashrc' >> $HOME/.bash_profile
 	. $HOME/.bash_profile
 	sleep 1
@@ -57,10 +57,10 @@ function installSnapshot {
 	systemctl restart ironfishd
 }
 
-function setupSwap {
-	echo -e '\n\e[42mSet up swapfile\e[0m\n'
-	curl -s https://api.nodes.guru/swap4.sh | bash
-}
+#function setupSwap {
+#	echo -e '\n\e[42mSet up swapfile\e[0m\n'
+#	curl -s https://api.nodes.guru/swap4.sh | bash
+#}
 
 function backupWallet {
 	echo -e '\n\e[42mPreparing to backup default wallet...\e[0m\n' && sleep 1
@@ -134,13 +134,18 @@ function updateSoftware {
         else
           echo -e "Your IronFish node \e[31mwas not upgraded correctly\e[39m, please reinstall."
         fi
-        if [[ `service ironfishd-miner status | grep active` =~ "running" ]]; then
-          sudo systemctl restart ironfishd-miner
-	fi
+#        if [[ `service ironfishd-miner status | grep active` =~ "running" ]]; then
+#          sudo systemctl restart ironfishd-miner
+#	fi
         . $HOME/.bash_profile
 
 }
+function quest {
 
+
+
+
+}
 function installService {
 echo -e '\n\e[42mRunning\e[0m\n' && sleep 1
 echo -e '\n\e[42mCreating a service\e[0m\n' && sleep 1
@@ -157,28 +162,28 @@ LimitNOFILE=10000
 [Install]
 WantedBy=multi-user.target
 " > $HOME/ironfishd.service
-echo "[Unit]
-Description=IronFish Miner
-After=network-online.target
-[Service]
-User=$USER
-ExecStart=$(which ironfish) miners:start -v -t $IRONFISH_THREADS --no-richOutput
-Restart=always
-RestartSec=10
-LimitNOFILE=10000
-[Install]
-WantedBy=multi-user.target
-" > $HOME/ironfishd-miner.service
+#echo "[Unit]
+#Description=IronFish Miner
+#After=network-online.target
+#[Service]
+#User=$USER
+#ExecStart=$(which ironfish) miners:start -v -t $IRONFISH_THREADS --no-richOutput
+#Restart=always
+#RestartSec=10
+#LimitNOFILE=10000
+#[Install]
+#WantedBy=multi-user.target
+#" > $HOME/ironfishd-miner.service
 sudo mv $HOME/ironfishd.service /etc/systemd/system
-sudo mv $HOME/ironfishd-miner.service /etc/systemd/system
+#sudo mv $HOME/ironfishd-miner.service /etc/systemd/system
 sudo tee <<EOF >/dev/null /etc/systemd/journald.conf
 Storage=persistent
 EOF
 sudo systemctl restart systemd-journald
 sudo systemctl daemon-reload
 echo -e '\n\e[42mRunning a service\e[0m\n' && sleep 1
-sudo systemctl enable ironfishd ironfishd-miner
-sudo systemctl restart ironfishd ironfishd-miner
+sudo systemctl enable ironfishd #ironfishd-miner
+sudo systemctl restart ironfishd #ironfishd-miner
 echo -e '\n\e[42mCheck node status\e[0m\n' && sleep 1
 if [[ `service ironfishd status | grep active` =~ "running" ]]; then
   echo -e "Your IronFish node \e[32minstalled and works\e[39m!"
@@ -187,19 +192,19 @@ if [[ `service ironfishd status | grep active` =~ "running" ]]; then
 else
   echo -e "Your IronFish node \e[31mwas not installed correctly\e[39m, please reinstall."
 fi
-if [[ `service ironfishd-miner status | grep active` =~ "running" ]]; then
-  echo -e "Your IronFish Miner node \e[32minstalled and works\e[39m!"
-  echo -e "You can check node status by the command \e[7mservice ironfishd-miner status\e[0m"
-  echo -e "Press \e[7mQ\e[0m for exit from status menu"
-else
-  echo -e "Your IronFish Miner node \e[31mwas not installed correctly\e[39m, please reinstall."
-fi
+#if [[ `service ironfishd-miner status | grep active` =~ "running" ]]; then
+#  echo -e "Your IronFish Miner node \e[32minstalled and works\e[39m!"
+#  echo -e "You can check node status by the command \e[7mservice ironfishd-miner status\e[0m"
+#  echo -e "Press \e[7mQ\e[0m for exit from status menu"
+#else
+#  echo -e "Your IronFish Miner node \e[31mwas not installed correctly\e[39m, please reinstall."
+#fi
 . $HOME/.bash_profile
 }
 
 function deleteIronfish {
 	sudo systemctl disable ironfishd ironfishd-miner
-	sudo systemctl stop ironfishd ironfishd-miner 
+#	sudo systemctl stop ironfishd ironfishd-miner 
 	sudo rm -rf $HOME/ironfish $HOME/.ironfish $(which ironfish)
 }
 
@@ -211,7 +216,7 @@ do
         "Install")
             echo -e '\n\e[42mYou choose install...\e[0m\n' && sleep 1
 			setupVars
-			setupSwap
+#			setupSwap
 			installDeps
 			installSoftware
 			installService
