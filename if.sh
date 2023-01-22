@@ -183,7 +183,7 @@ sudo systemctl restart systemd-journald
 sudo systemctl daemon-reload
 echo -e '\n\e[42mRunning a service\e[0m\n' && sleep 1
 sudo systemctl enable ironfishd #ironfishd-miner
-sudo systemctl restart ironfishd #ironfishd-miner
+#sudo systemctl restart ironfishd #ironfishd-miner
 echo -e '\n\e[42mCheck node status\e[0m\n' && sleep 1
 if [[ `service ironfishd status | grep active` =~ "running" ]]; then
   echo -e "Your IronFish node \e[32minstalled and works\e[39m!"
@@ -203,8 +203,8 @@ fi
 }
 
 function deleteIronfish {
-	sudo systemctl disable ironfishd ironfishd-miner
-#	sudo systemctl stop ironfishd ironfishd-miner 
+	sudo systemctl disable ironfishd #ironfishd-miner
+	sudo systemctl stop ironfishd #ironfishd-miner 
 	sudo rm -rf $HOME/ironfish $HOME/.ironfish $(which ironfish)
 }
 
