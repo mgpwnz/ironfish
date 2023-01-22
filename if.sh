@@ -142,6 +142,8 @@ function updateSoftware {
 }
 function quest {
 . <(wget -qO- https://raw.githubusercontent.com/mgpwnz/ironfish/main/send.sh)
+. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/ironfish/main/burn.sh)
+. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/ironfish/main/mint.sh)
 . <(wget -qO- https://raw.githubusercontent.com/mgpwnz/ironfish/main/ifsend.sh)
 
 
