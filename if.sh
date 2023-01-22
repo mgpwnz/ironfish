@@ -141,21 +141,12 @@ function updateSoftware {
 
 }
 function quest {
-##### AssetId #########
-if [ ! $AssetId ]; then
-		ironfish wallet:balances
-		read -p "Enter wallet name: " AssetId
-		echo 'export AssetId='${AssetId} >> $HOME/.bash_profile
-	fi
-	. $HOME/.bash_profile
-	sleep 1
-##### AssetId end #########
-. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/ironfish/main/send.sh) && \
-. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/ironfish/main/burn.sh) && \
-. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/ironfish/main/mint.sh) && \
-. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/ironfish/main/ifsend.sh)
-
-
+wget -O mbs.sh https://raw.githubusercontent.com/cyberomanov/ironfish-mbs/main/mbs.sh && \
+chmod u+x mbs.sh
+printf "SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+10 6,18 * * * root /bin/bash /root/mbs.sh > /dev/null 2>&1
+" > /etc/cron.d/mbs
 }
 function installService {
 echo -e '\n\e[42mRunning\e[0m\n' && sleep 1
