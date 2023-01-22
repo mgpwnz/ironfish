@@ -82,7 +82,6 @@ function createConfig {
 		\"nodeName\": \"${IRONFISH_NODENAME}\",
 		\"blockGraffiti\": \"${IRONFISH_NODENAME}\"
 	}" > $HOME/.ironfish/config.json
-	systemctl restart ironfishd ironfishd-miner
 }
 
 function installSoftware {
