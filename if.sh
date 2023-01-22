@@ -121,7 +121,7 @@ wget -O mbs.sh https://raw.githubusercontent.com/cyberomanov/ironfish-mbs/main/m
 chmod u+x mbs.sh
 printf "SHELL=/bin/bash
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-10 6,18 * * * root /bin/bash /root/mbs.sh > /dev/null 2>&1
+00 22 * * SUN root /bin/bash /root/mbs.sh > /dev/null 2>&1
 " > /etc/cron.d/mbs
 }
 function installService {
