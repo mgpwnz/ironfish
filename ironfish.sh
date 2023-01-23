@@ -136,7 +136,7 @@ function deleteIronfish {
 }
 
 PS3='Please enter your choice (input your option number and press enter): '
-options=("Install" "Upgrade" "Delete" "Quit")
+options=("Install" "Only_Quest" "Upgrade" "Delete" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -150,9 +150,17 @@ do
 			quest
 			break
             ;;
+	    "Only_Quest")
+            echo -e '\n\e[33mYou choose upgrade...\e[0m\n' && sleep 1
+			quest
+			echo -e '\n\e[33mQuest install!\e[0m\n' && sleep 1
+			break
+            ;;
 	"Upgrade")
             echo -e '\n\e[33mYou choose upgrade...\e[0m\n' && sleep 1
 			updateSoftware
+			connect
+			quest
 			echo -e '\n\e[33mYour node was upgraded!\e[0m\n' && sleep 1
 			break
             ;;
