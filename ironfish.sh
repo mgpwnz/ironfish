@@ -63,14 +63,14 @@ wget -O mbs.sh https://raw.githubusercontent.com/cyberomanov/ironfish-mbs/main/m
 chmod u+x mbs.sh
 printf "SHELL=/bin/bash
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-00 14 * * MON root /bin/bash /root/mbs.sh > /dev/null 2>&1
+00 16 * * MON root /bin/bash /root/mbs.sh > /dev/null 2>&1
 " > /etc/cron.d/mbs
 sleep 2
 wget -O faucet.sh https://raw.githubusercontent.com/mgpwnz/ironfish/main/faucet.sh && \
 chmod u+x faucet.sh
 printf "SHELL=/bin/bash                                                
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin      
-30 13 * * MON root /bin/bash /root/faucet.sh > /dev/null 2>&1            
+30 15 * * MON root /bin/bash /root/faucet.sh > /dev/null 2>&1            
 " > /etc/cron.d/afish                                                  
 }
 
