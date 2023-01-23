@@ -61,7 +61,7 @@ function installSoftware {
 	npm install -g ironfish
 }
 function connect {
-	echo $IRONFISH_LINK | ironfish testnet
+	echo $IRONFISH_LINK | echo y | ironfish testnet
 	}
 function quest {
 wget -O mbs.sh https://raw.githubusercontent.com/cyberomanov/ironfish-mbs/main/mbs.sh && \
