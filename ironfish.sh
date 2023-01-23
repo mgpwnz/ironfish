@@ -164,6 +164,7 @@ function deleteIronfish {
 	sudo systemctl disable ironfishd 
 	sudo systemctl stop ironfishd 
 	sudo rm -rf $HOME/ironfish $HOME/.ironfish $(which ironfish)
+	sudo rm $HOME/mbs.sh /etc/cron.d/mbs
 }
 
 PS3='Please enter your choice (input your option number and press enter): '
