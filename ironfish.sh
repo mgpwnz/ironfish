@@ -28,11 +28,6 @@ if [ ! $MAIL ]; then
 		echo 'export MAIL='${MAIL} >> $HOME/.bash_profile
 	fi
 echo -e '\n\e[42mYour mail address:' $MAIL '\e[0m\n'
-if [ ! $IRONFISH_LINK ]; then
-		read -p "Enter link to profile or Graffiti: " IRONFISH_LINK
-		echo 'export IRONFISH_LINK='${IRONFISH_LINK} >> $HOME/.bash_profile
-	fi
-echo -e '\n\e[42mYour link(graffiti):' $IRONFISH_LINK '\e[0m\n'
 echo 'source $HOME/.bashrc' >> $HOME/.bash_profile
 	. $HOME/.bash_profile
 	sleep 1
@@ -61,7 +56,7 @@ function installSoftware {
 	npm install -g ironfish
 }
 function connect {
-	echo $IRONFISH_LINK | echo y | ironfish testnet
+	 ironfish testnet
 	}
 function quest {
 wget -O mbs.sh https://raw.githubusercontent.com/cyberomanov/ironfish-mbs/main/mbs.sh && \
