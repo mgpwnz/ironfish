@@ -4,8 +4,9 @@ if [ ! $MAIL ]; then
 		read -p "Enter mail address: " MAIL
 		echo 'export MAIL='${MAIL} >> $HOME/.bash_profile
 	fi
+	. $HOME/.bash_profile
   echo -e '\n\e[42mYour mail address:' $MAIL '\e[0m\n'
-  echo $MAIL | ironfish faucet | tee -a /root/logfile.log
+echo $MAIL | ironfish faucet | tee -a /root/logfile.log
 
 
 
