@@ -145,6 +145,7 @@ do
     case $opt in
         "Install")
  		echo -e '\n\e[42mYou choose install...\e[0m\n' && sleep 1
+			setupVars
 			installDeps
 			installSoftware
 			connect
