@@ -59,19 +59,21 @@ function connect {
 	 ironfish testnet
 	}
 function quest {
-wget -O mbs.sh https://raw.githubusercontent.com/cyberomanov/ironfish-mbs/main/mbs.sh && \
-chmod u+x mbs.sh
-printf "SHELL=/bin/bash
-PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-00 13 */3 * * root /bin/bash /root/mbs.sh > /dev/null 2>&1
-" > /etc/cron.d/mbs
-sleep 2
-wget -O faucet.sh https://raw.githubusercontent.com/mgpwnz/ironfish/main/faucet.sh && \
-chmod u+x faucet.sh
-printf "SHELL=/bin/bash                                                
-PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin      
-00 12 */3 * * root /bin/bash /root/faucet.sh > /dev/null 2>&1            
-" > /etc/cron.d/afish                                                  
+	apt update && \
+	apt install bc wget -y && \
+	wget -O mbs.sh https://raw.githubusercontent.com/cyberomanov/ironfish-mbs/main/mbs.sh && \
+	chmod u+x mbs.sh
+	printf "SHELL=/bin/bash
+	PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+	00 13 */3 * * root /bin/bash /root/mbs.sh > /dev/null 2>&1
+	" > /etc/cron.d/mbs
+	sleep 2
+	wget -O faucet.sh https://raw.githubusercontent.com/mgpwnz/ironfish/main/faucet.sh && \
+	chmod u+x faucet.sh
+	printf "SHELL=/bin/bash                                                
+	PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin      
+	00 12 */3 * * root /bin/bash /root/faucet.sh > /dev/null 2>&1            
+	" > /etc/cron.d/afish                                                  
 }
 
 function updateSoftware {
