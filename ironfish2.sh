@@ -125,6 +125,8 @@ function deleteIronfish {
 }
 function deletequest {
 	sudo rm $HOME/mbs.sh /etc/cron.d/mbs
+	#Old file#
+	sudo rm /etc/cron.d/afish $HOME/faucet.sh
 }
 
 PS3='Please enter your choice (input your option number and press enter): '
