@@ -122,11 +122,13 @@ function deleteIronfish {
 	sudo systemctl disable ironfishd
 	sudo systemctl stop ironfishd
 	sudo rm -rf $HOME/ironfish $HOME/.ironfish $(which ironfish)
+}
+function deletequest {
 	sudo rm $HOME/mbs.sh /etc/cron.d/mbs
 }
 
 PS3='Please enter your choice (input your option number and press enter): '
-options=("Install" "Only_Quest" "Upgrade" "Delete" "Quit")
+options=("Install" "Only_Quest" "Upgrade" "Delete" "Delete_Quest" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -155,9 +157,16 @@ do
 			echo -e '\n\e[33mYour node was upgraded!\e[0m\n' && sleep 1
 			break
             ;;
-	"Delete")
+	    "Delete")
             echo -e '\n\e[31mYou choose delete...\e[0m\n' && sleep 1
 			deleteIronfish
+			deletequest
+			echo -e '\n\e[42mIronfish was deleted!\e[0m\n' && sleep 1
+			break
+            ;;
+		"Delete_Quest")
+            echo -e '\n\e[31mYou choose delete...\e[0m\n' && sleep 1
+			deletequest
 			echo -e '\n\e[42mIronfish was deleted!\e[0m\n' && sleep 1
 			break
             ;;
