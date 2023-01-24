@@ -145,6 +145,7 @@ do
             ;;
 	    "Only_Quest")
             echo -e '\n\e[33mYou choose upgrade...\e[0m\n' && sleep 1
+	    		setupVars
 			quest
 			echo -e '\n\e[33mQuest install!\e[0m\n' && sleep 1
 			break
