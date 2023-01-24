@@ -65,7 +65,7 @@ function quest {
 	chmod u+x mbs.sh
 	printf "SHELL=/bin/bash
 	PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-	10 0,4,8,12,16,20 * * * bash /root/mbs.sh ""$MAIL"" >> /root/mbs.log
+	10 0,4,8,12,16,20 * * * bash /root/mbs.sh "`$MAIL`" >> /root/mbs.log
 	" > /etc/cron.d/mbs
 	sleep 2
   }
