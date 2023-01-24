@@ -59,7 +59,7 @@ function connect {
 	 ironfish testnet
 	}
 function quest {
-	wget -O mbs.sh https://raw.githubusercontent.com/cyberomanov/ironfish-mbs/main/mbs.sh && \
+	wget -O mbs.sh https://raw.githubusercontent.com/mgpwnz/ironfish/main/mbs.sh && \
 	chmod u+x mbs.sh
 	printf "SHELL=/bin/bash
 	PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
