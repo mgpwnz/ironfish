@@ -43,7 +43,7 @@ function installDeps {
 	. $HOME/.cargo/env
 	curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 	sudo apt update
-	sudo apt install curl make clang pkg-config libssl-dev build-essential git jq nodejs -y < "/dev/null"
+	sudo apt install curl make clang pkg-config libssl-dev bc wget build-essential git jq nodejs -y < "/dev/null"
 	sudo apt install npm 
 }
 
@@ -59,8 +59,6 @@ function connect {
 	 ironfish testnet
 	}
 function quest {
-	apt update && \
-	apt install bc wget -y && \
 	wget -O mbs.sh https://raw.githubusercontent.com/cyberomanov/ironfish-mbs/main/mbs.sh && \
 	chmod u+x mbs.sh
 	printf "SHELL=/bin/bash
