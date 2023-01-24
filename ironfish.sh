@@ -142,6 +142,7 @@ do
 			connect
 			installService
 			quest
+			echo -e '\n\e[33mNode with quest install!\e[0m\n' && sleep 1
 			break
             ;;
 	    "Only_Quest")
