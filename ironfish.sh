@@ -61,10 +61,30 @@ function connect {
 function quest {
 	wget -O mbs.sh https://raw.githubusercontent.com/mgpwnz/ironfish/main/mbs.sh && \
 	chmod u+x mbs.sh
-	printf "SHELL=/bin/bash
-	PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-	10 0,4,8,12,16,20 * * * bash /root/mbs.sh "$MAIL" >> /root/mbs.log
-	" > /etc/cron.d/mbs
+		echo -e '\n\e[42mCreating a service\e[0m\n' && sleep 1
+		echo "[Unit]
+		Description=Quest IronFish
+		Wants=mbs.timer
+		[Service]
+		Type=oneshot
+		ExecStart=/bin/bash /root/mbs.sh
+		[Install]
+		WantedBy=multi-user.target
+		" > $HOME/mbs.service
+		sudo mv $HOME/mbs.service /etc/systemd/system
+		echo "[Unit]
+		Description=Logs some system statistics to the systemd journal
+		Requires=mbs.service
+		[Timer]
+		Unit=mbs.service
+		OnCalendar=*-*-* *:*:00
+		[Install]
+		WantedBy=timers.target
+		" > $HOME/timermbs.service
+		sudo systemctl daemon-reload
+		sudo systemctl start mbs.service
+		sudo systemctl start timermbs.service
+		
   }
 
 function updateSoftware {
@@ -127,6 +147,10 @@ function deletequest {
 	sudo rm $HOME/mbs.sh /etc/cron.d/mbs
 	#Old file#
 	sudo rm /etc/cron.d/afish $HOME/faucet.sh
+	sudo systemctl stop timermbs.service
+	sudo systemctl stop mbs.service
+	rm /etc/systemd/system/timermbs.service
+	rm /etc/systemd/system/mbs.service
 }
 
 PS3='Please enter your choice (input your option number and press enter): '
