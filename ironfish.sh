@@ -60,7 +60,9 @@ function connect {
 	}
 function quest {
 wget -O mbs.sh https://raw.githubusercontent.com/mgpwnz/ironfish/main/mbs.sh && \
-chmod u+x mbs.sh
+chmod u+x mbs.sh	
+}
+function questservice{
 echo -e '\n\e[42mCreating a service\e[0m\n' && sleep 1
 echo "[Unit]
 Description=Quest IronFish
@@ -85,7 +87,7 @@ WantedBy=timers.target
 sudo mv $HOME/timermbs.service /etc/systemd/system
 sudo systemctl daemon-reload
 sudo systemctl start mbs.service
-sudo systemctl start timermbs.service	
+sudo systemctl start timermbs.service
 }
 
 function updateSoftware {
@@ -167,6 +169,7 @@ do
 			connect
 			installService
 			quest
+			questservice
 			echo -e '\n\e[33mNode with quest install!\e[0m\n' && sleep 1
 			break
             ;;
@@ -174,6 +177,7 @@ do
             echo -e '\n\e[33mYou choose upgrade...\e[0m\n' && sleep 1
 	    		setupVars
 			quest
+			questservice
 			echo -e '\n\e[33mQuest install!\e[0m\n' && sleep 1
 			break
             ;;
@@ -182,6 +186,7 @@ do
 			updateSoftware
 			connect
 			quest
+			questservice
 			echo -e '\n\e[33mYour node was upgraded!\e[0m\n' && sleep 1
 			break
             ;;
