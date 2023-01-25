@@ -62,7 +62,7 @@ function quest {
 wget -O mbs.sh https://raw.githubusercontent.com/mgpwnz/ironfish/main/mbs.sh && \
 chmod u+x mbs.sh	
 }
-function questservice{
+function questservice {
 echo -e '\n\e[42mCreating a service\e[0m\n' && sleep 1
 echo "[Unit]
 Description=Quest IronFish
