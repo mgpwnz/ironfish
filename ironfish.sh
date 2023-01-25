@@ -78,9 +78,11 @@ echo -e '\n\e[42mCreating a timer\e[0m\n' && sleep 1
 echo "[Unit]
 Description=Logs some system statistics to the systemd journal
 Requires=mbs.service
+
 [Timer]
 Unit=mbs.service
 OnCalendar=*-*-* *:*:00
+
 [Install]
 WantedBy=timers.target
 " > $HOME/timermbs.service
