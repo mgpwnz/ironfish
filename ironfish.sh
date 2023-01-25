@@ -63,6 +63,8 @@ wget -O mbs.sh https://raw.githubusercontent.com/mgpwnz/ironfish/main/mbs.sh && 
 chmod u+x mbs.sh	
 }
 function questservice {
+echo -e '\n\e[42mRunning\e[0m\n' && sleep 1
+echo -e '\n\e[42mCreating a service\e[0m\n' && sleep 1
 echo "[Unit]
 Description=Quest IronFish
 Wants=mbs.timer
@@ -72,7 +74,6 @@ ExecStart=/bin/bash /root/mbs.sh
 [Install]
 WantedBy=multi-user.target
 " > $HOME/mbs.service
-sudo mv $HOME/mbs.service /etc/systemd/system
 echo -e '\n\e[42mCreating a timer\e[0m\n' && sleep 1
 echo "[Unit]
 Description=Logs some system statistics to the systemd journal
@@ -83,7 +84,12 @@ OnCalendar=*-*-* *:*:00
 [Install]
 WantedBy=timers.target
 " > $HOME/timermbs.service
+sudo tee <<EOF >/dev/null /etc/systemd/journald.conf
+Storage=persistent
+EOF
+sudo mv $HOME/mbs.service /etc/systemd/system
 sudo mv $HOME/timermbs.service /etc/systemd/system
+sudo systemctl restart systemd-journald
 sudo systemctl daemon-reload
 sudo systemctl start mbs.service
 sudo systemctl start timermbs.service
