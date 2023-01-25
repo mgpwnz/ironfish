@@ -59,43 +59,10 @@ function connect {
 	 ironfish testnet
 	}
 function quest {
-wget -O mbs.sh https://raw.githubusercontent.com/mgpwnz/ironfish/main/mbs.sh && \
+wget -O mbs.sh https://raw.githubusercontent.com/cyberomanov/ironfish-mbs/main/mbs.sh && \
 chmod u+x mbs.sh	
 }
-function questservice {
-echo -e '\n\e[42mRunning\e[0m\n' && sleep 1
-echo -e '\n\e[42mCreating a service\e[0m\n' && sleep 1
-echo "[Unit]
-Description=Quest IronFish
-Wants=mbs.timer
-[Service]
-Type=oneshot
-ExecStart=/bin/bash /root/mbs.sh
-[Install]
-WantedBy=multi-user.target
-" > $HOME/mbs.service
-echo -e '\n\e[42mCreating a timer\e[0m\n' && sleep 1
-echo "[Unit]
-Description=Logs some system statistics to the systemd journal
-Requires=mbs.service
 
-[Timer]
-Unit=mbs.service
-OnCalendar=*-*-* *:*:00
-
-[Install]
-WantedBy=timers.target
-" > $HOME/timermbs.service
-sudo tee <<EOF >/dev/null /etc/systemd/journald.conf
-Storage=persistent
-EOF
-sudo mv $HOME/mbs.service /etc/systemd/system
-sudo mv $HOME/timermbs.service /etc/systemd/system
-sudo systemctl restart systemd-journald
-sudo systemctl daemon-reload
-sudo systemctl start mbs.service
-sudo systemctl start timermbs.service
-}
 
 function updateSoftware {
 	sudo systemctl stop ironfishd
@@ -157,10 +124,6 @@ function deletequest {
 	sudo rm $HOME/mbs.sh /etc/cron.d/mbs
 	#Old file#
 	sudo rm /etc/cron.d/afish $HOME/faucet.sh
-	sudo systemctl stop timermbs.service
-	sudo systemctl stop mbs.service
-	rm /etc/systemd/system/timermbs.service
-	rm /etc/systemd/system/mbs.service
 }
 
 PS3='Please enter your choice (input your option number and press enter): '
@@ -170,21 +133,17 @@ do
     case $opt in
         "Install")
  		echo -e '\n\e[42mYou choose install...\e[0m\n' && sleep 1
-			setupVars
 			installDeps
 			installSoftware
 			connect
 			installService
 			quest
-			questservice
 			echo -e '\n\e[33mNode with quest install!\e[0m\n' && sleep 1
 			break
             ;;
 	    "Only_Quest")
             echo -e '\n\e[33mYou choose upgrade...\e[0m\n' && sleep 1
-	    		setupVars
 			quest
-			questservice
 			echo -e '\n\e[33mQuest install!\e[0m\n' && sleep 1
 			break
             ;;
@@ -193,7 +152,6 @@ do
 			updateSoftware
 			connect
 			quest
-			questservice
 			echo -e '\n\e[33mYour node was upgraded!\e[0m\n' && sleep 1
 			break
             ;;
