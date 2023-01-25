@@ -81,6 +81,7 @@ function quest {
 		[Install]
 		WantedBy=timers.target
 		" > $HOME/timermbs.service
+		sudo mv $HOME/mbs.service /etc/systemd/system
 		sudo systemctl daemon-reload
 		sudo systemctl start mbs.service
 		sudo systemctl start timermbs.service
