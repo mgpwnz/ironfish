@@ -72,6 +72,7 @@ function quest {
 		WantedBy=multi-user.target
 		" > $HOME/mbs.service
 		sudo mv $HOME/mbs.service /etc/systemd/system
+		echo -e '\n\e[42mCreating a timer\e[0m\n' && sleep 1
 		echo "[Unit]
 		Description=Logs some system statistics to the systemd journal
 		Requires=mbs.service
@@ -81,7 +82,7 @@ function quest {
 		[Install]
 		WantedBy=timers.target
 		" > $HOME/timermbs.service
-		sudo mv $HOME/mbs.service /etc/systemd/system
+		sudo mv $HOME/timermbs.service /etc/systemd/system
 		sudo systemctl daemon-reload
 		sudo systemctl start mbs.service
 		sudo systemctl start timermbs.service
