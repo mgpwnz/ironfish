@@ -114,7 +114,9 @@ else
 fi
 . $HOME/.bash_profile
 }
-
+function migrations {
+	ironfish migrations:start
+}
 function deleteIronfish {
 	sudo systemctl disable ironfishd
 	sudo systemctl stop ironfishd
@@ -151,6 +153,7 @@ do
             echo -e '\n\e[33mYou choose upgrade...\e[0m\n' && sleep 1
 			updateSoftware
 			connect
+			migrations
 			quest
 			echo -e '\n\e[33mYour node was upgraded!\e[0m\n' && sleep 1
 			break
