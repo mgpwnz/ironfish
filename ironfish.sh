@@ -72,8 +72,6 @@ function updateSoftware {
 	sleep 2
 	if [[ `service ironfishd status | grep active` =~ "running" ]]; then
           echo -e "Your IronFish node \e[32mupgraded and works\e[39m!"
-          echo -e "You can check node status by the command \e[7mservice ironfishd status\e[0m"
-          echo -e "Press \e[7mQ\e[0m for exit from status menu"
         else
           echo -e "Your IronFish node \e[31mwas not upgraded correctly\e[39m, please reinstall."
         fi
@@ -115,7 +113,9 @@ fi
 . $HOME/.bash_profile
 }
 function migrations {
+	sudo systemctl stop ironfishd
 	ironfish migrations:start
+	sudo systemctl restart ironfishd
 }
 function deleteIronfish {
 	sudo systemctl disable ironfishd
@@ -155,7 +155,7 @@ do
 			connect
 			migrations
 			quest
-			echo -e '\n\e[33mYour node was upgraded!\e[0m\n' && sleep 1
+			echo -e "You can check node status by the command \e[7mironfish status -f\e[0m"
 			break
             ;;
 	    "Delete")
