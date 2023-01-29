@@ -112,6 +112,15 @@ else
 fi
 . $HOME/.bash_profile
 }
+function installSnapshot {
+	echo -e '\n\e[42mInstalling snapshot...\e[0m\n' && sleep 1
+	systemctl stop ironfishd
+#	rm -rf $HOME/.ironfish/databases/default/
+	sleep 5
+	ironfish chain:download --confirm
+	sleep 3
+	systemctl restart ironfishd
+}
 function migrations {
 	sudo systemctl stop ironfishd
 	ironfish migrations:start
@@ -129,7 +138,7 @@ function deletequest {
 }
 
 PS3='Please enter your choice (input your option number and press enter): '
-options=("Install" "Only_Quest" "Upgrade" "Delete" "Delete_Quest" "Quit")
+options=("Install" "Only_Quest" "Upgrade" "Install snapshot" "Delete" "Delete_Quest" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -158,6 +167,12 @@ do
 			echo -e "You can check node status by the command \e[7mironfish status -f\e[0m"
 			break
             ;;
+	     "Install snapshot")
+			 echo -e '\n\e[33mYou choose install snapshot...\e[0m\n' && sleep 1
+			 installSnapshot
+			 echo -e '\n\e[33mSnapshot was installed, node was started.\e[0m\n' && sleep 1
+			 break
+             ;;
 	    "Delete")
             echo -e '\n\e[31mYou choose delete...\e[0m\n' && sleep 1
 			deleteIronfish
